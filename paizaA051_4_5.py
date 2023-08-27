@@ -1,0 +1,54 @@
+# coding: utf-8
+# Your code here!
+# coding: utf-8
+# 自分の得意な言語で
+# Let's チャレンジ！！
+# import time
+# clock = time.time()
+#prepare Initial Conditional Parameter
+import sys
+
+sys.setrecursionlimit(2000)
+
+import random
+H = random.randrange(1000)+1
+W = random.randrange(1000)+1
+print(H,W)
+S = []
+for i in range(H):
+    S.append([ int(random.randrange(10)) for s in range(W)])
+#     S.append([ int(s) for s in input().split(' ')][0:1])
+# W=1
+# print(S)
+
+#Dynamic Program
+def dynamicProgram(array,w):
+    if len(array)==1:
+        return max(array[0])
+    # if w<=2:
+    #     maxArray = [max(array[0][0:2])]*w
+    # if w>2:
+    maxArray = [ ]
+    for i in range(w):
+        if i==0:
+            maxArray.append(max(array[0][0:2]))
+            # print(i,array[0][0:2])
+        # elif i==w-1:
+        #     maxArray.append(max(array[0][w-2:w]))
+        #     # print(i,array[0][w-2:w])
+        else:
+            maxArray.append(max(array[0][i-1:i+2]))
+            # print(i,array[0][i-1:i+2])
+    # print(maxArray)
+        
+    array[1] = [x + y for (x, y) in zip(array[1],maxArray)]
+    array.pop(0)
+    # if len(array)==1:
+    #     return max(array[0])
+    # else:
+    # print(array)
+    return dynamicProgram(array,w)
+
+print(dynamicProgram(S,W))
+
+
