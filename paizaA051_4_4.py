@@ -4,13 +4,13 @@
 # import time
 # clock = time.time()
 #prepare Initial Conditional Parameter
-HW = [ int(s) for s in input().split(' ')]
+HW = [ int(s) for s in input().rstrip().split(' ')]
 H = HW[0]
 W = HW[1]
 # print(HW)
 S = []
 for i in range(H):
-    S.append([ int(s) for s in input().split(' ')])
+    S.append([ int(s) for s in input().rstrip().split(' ')])
 #     S.append([ int(s) for s in input().split(' ')][0:1])
 # W=1
 # print(S)
@@ -19,6 +19,9 @@ for i in range(H):
 def dynamicProgram(array,w):
     if len(array)==1:
         return max(array[0])
+    # if w<=2:
+    #     maxArray = [max(array[0][0:2])]*w
+    # if w>2:
     maxArray = [ ]
     for i in range(w):
         if i==0:
@@ -34,6 +37,9 @@ def dynamicProgram(array,w):
         
     array[1] = [x + y for (x, y) in zip(array[1],maxArray)]
     array.pop(0)
+    # if len(array)==1:
+    #     return max(array[0])
+    # else:
     # print(array)
     return dynamicProgram(array,w)
 
